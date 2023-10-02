@@ -38,11 +38,11 @@ class A{
 		try{ 	
 			String filename = "AUTOBROKERMAIL.json";
 			File f = new File(filename);
-                	if (!f.exists())
-                        	System.out.printf("settings file %1 does not exist \n", filename);
+        	if (!f.exists())
+            	System.out.printf("settings file %1 does not exist \n", filename);
 			if  (f.exists()){
 				JsonReader reader = new JsonReader(new FileReader(filename));
-    				map = gson.fromJson(reader, HashMap.class);	
+    			map = gson.fromJson(reader, HashMap.class);	
 				System.out.printf( "map to string: %s \n", gson.toJson(map));
 				};
 		}
@@ -52,8 +52,8 @@ class A{
 			e.printStackTrace();
 		};
 
-		System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		System.out.printf("map.toString() = %s \n",map.toString());
+		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
+		//System.out.printf("map.toString() = %s \n",map.toString());
 
 		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
 		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
@@ -62,17 +62,17 @@ class A{
 
         ///////////////////////////////////////////////////////////////
 
-        String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"luidorexpertALL\", \"lparts.password\":\"cfirdrfnabxyzmgk\",\"lparts.fileFound\":\"false\"}";
+        String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
         HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 	
 		try{ 	
 			String filename = "LPARTSMAIL.json";
 			File f = new File(filename);
             if (!f.exists())
-                        	System.out.printf("settings file %1 does not exist \n", filename);
+            	System.out.printf("settings file %1 does not exist \n", filename);
 			if  (f.exists()){
 				JsonReader reader = new JsonReader(new FileReader(filename));
-    				map = gson.fromJson(reader, HashMap.class);	
+    			map = gson.fromJson(reader, HashMap.class);	
 				System.out.printf( "map to string: %s \n", gson.toJson(map));
 				};
 		}
