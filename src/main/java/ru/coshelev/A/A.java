@@ -47,7 +47,6 @@ class A{
 				};
 		}
 		catch (Exception e) {
-			System.out.print("exception!");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		};
@@ -72,12 +71,11 @@ class A{
             	System.out.printf("settings file %1 does not exist \n", filename);
 			if  (f.exists()){
 				JsonReader reader = new JsonReader(new FileReader(filename));
-    			map = gson.fromJson(reader, HashMap.class);	
-				System.out.printf( "map to string: %s \n", gson.toJson(map));
+    			map1 = gson.fromJson(reader, HashMap.class);	
+				System.out.printf( "map to string: %s \n", gson.toJson(map1));
 				};
 		}
 		catch (Exception e) {
-			System.out.print("exception!");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		};
