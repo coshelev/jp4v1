@@ -134,7 +134,7 @@ public class MailServlet extends HttpServlet {
 		  e.printStackTrace();}
    }
 
-      private void rreadlpartsMail(){
+      private void readlpartsMail(){
 
         final String host = A.AUTOBROKERMAIL_HOST;  
 	    final String user = A.AUTOBROKERMAIL_LOGIN;
