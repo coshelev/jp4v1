@@ -16,9 +16,9 @@ class A{
 	public static String AUTOBROKERMAIL_LOGIN    = "";
 	public static String AUTOBROKERMAIL_PASSWORD = "";
 
-    public static String LPARTSMAIL_HOST     = "";
-	public static String LPARTSMAIL_LOGIN    = "";
-	public static String LPARTSMAIL_PASSWORD = "";
+    public static String LPARTSMAIL_HOST     = "1";
+	public static String LPARTSMAIL_LOGIN    = "2";
+	public static String LPARTSMAIL_PASSWORD = "3";
 
 	public static void main(String[] args){
 				
@@ -76,6 +76,8 @@ class A{
 		//	LOG.error("{}", e.getMessage());
 		//	e.printStackTrace();
 		//};
+
+		LOG.info("map1.lpart.host= {}", map1.get("lpart.host"););
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
