@@ -21,9 +21,7 @@ class A{
 	public static String LPARTSMAIL_PASSWORD = "";
 
 	public static void main(String[] args){
-		
-
-	    LOG.info("jvm {}",  System.getProperty("java.version"));		
+				
 	    LOG.warn("This is my example for warning");
 	    LOG.info("LOG.isDebugEnabled()= {}",LOG.isDebugEnabled());
 	    LOG.debug("doStop {}", "This is example for debug");
@@ -51,9 +49,6 @@ class A{
 			e.printStackTrace();
 		};
 
-		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		//System.out.printf("map.toString() = %s \n",map.toString());
-
 		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
 		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
 		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
@@ -80,9 +75,6 @@ class A{
 			LOG.error("{}", e.getMessage());
 			e.printStackTrace();
 		};
-
-		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		//System.out.printf("map.toString() = %s \n",map1.toString());
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
