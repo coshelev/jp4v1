@@ -201,7 +201,7 @@ public class MailServlet extends HttpServlet {
             }    
          else if (bodyPart.isMimeType("text/html")) {
             String html = (String) bodyPart.getContent();
-            LOG.info("html= {}", html);
+            LOG.info("html = {}", html);
             readLPartsMessageText(html, messageId);
             } 
          else if (bodyPart.getContent() instanceof MimeMultipart){
@@ -217,10 +217,10 @@ public class MailServlet extends HttpServlet {
       try {    
       Document doc   = Jsoup.parse(html);
       String text    = doc.body().text();  
-      LOG.info("{}", text);
+      LOG.info("text = {}", text);
 
 	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
-      Pattern p = Pattern.compile("елефон.*:");
+      Pattern p = Pattern.compile("елефон");
 		Matcher mr = p.matcher(text);
 		boolean textContainsPhone = mr.matches();
       if (!textContainsPhone){
