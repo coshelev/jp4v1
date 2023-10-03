@@ -58,7 +58,7 @@ class A{
 
         //String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
 		String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
-        HashMap<String, String> map1 = gson.fromJson(LLPARTSMAILSettings, HashMap.class);
+        HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 	
 		//try{ 	
 		//	String filename = "LPARTS.json";
