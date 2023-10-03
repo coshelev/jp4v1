@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 public class MailServlet extends HttpServlet {
    private String greeting="Hello World from MailServlet";
-   private static final Logger LOG = LoggerFactory.getLogger(A.MailServlet);
+   private static final Logger LOG = LoggerFactory.getLogger(MailServlet.class);
 
     public MailServlet(){}
     public MailServlet(String greeting){
