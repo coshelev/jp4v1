@@ -191,7 +191,6 @@ public class MailServlet extends HttpServlet {
       Multipart mp = (Multipart) i.getContent();
       int count = mp.getCount();
       for (int j = 0; j < count; j++) {
-         result+="\n\n";
          BodyPart bodyPart = mimeMultipart.getBodyPart(i);
          if (bodyPart.isMimeType("text/plain")) {
             /*
@@ -202,11 +201,7 @@ public class MailServlet extends HttpServlet {
             }    
          else if (bodyPart.isMimeType("text/html")) {
             String html = (String) bodyPart.getContent();
-            //html has all the html tags for you
-            result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
-
             LOG.info("html= {}", html);
-
             } 
          else if (bodyPart.getContent() instanceof MimeMultipart){
             result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
