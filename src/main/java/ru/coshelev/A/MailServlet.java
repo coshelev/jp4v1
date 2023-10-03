@@ -47,9 +47,6 @@ public class MailServlet extends HttpServlet {
 
         try {
            
-            String strg = A.AUTOBROKERMAIL_HOST;
-	        System.out.printf("strg = %s", strg);
-		 
             Properties props = new Properties();
             props.put("mail.debug", "false");
             props.put("mail.store.protocol", "imaps");
@@ -64,7 +61,7 @@ public class MailServlet extends HttpServlet {
             inbox.open(Folder.READ_ONLY);
             
             final FromTerm fromTerm  = new FromTerm(new InternetAddress("no_reply@ab-club.ru"));
-	        final FromTerm fromTerm1  = new FromTerm(new InternetAddress("no-reply@bibika.ru"));
+	         final FromTerm fromTerm1  = new FromTerm(new InternetAddress("no-reply@bibika.ru"));
                       
             var a = java.time.LocalDate.now().minusDays(1);
             Date  receivedDate = java.sql.Date.valueOf(a);
@@ -92,41 +89,41 @@ public class MailServlet extends HttpServlet {
                String text = doc.body().text();  
                System.out.println("text = "+text);
 
-	        System.out.println("regex start..");
-	       Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
-		   Matcher mr = p.matcher(text);
-		boolean hasPhone = mr.matches();
-	       	System.out.println(hasPhone);
+	            System.out.println("regex start..");
+	            Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
+		         Matcher mr = p.matcher(text);
+		         boolean hasPhone = mr.matches();
+	       	   System.out.println(hasPhone);
                if (!hasPhone){
                     System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
                     return;};
-	 	System.out.println("pattern ([0-9][0-9][0-9]) found");
+	 	         System.out.println("pattern ([0-9][0-9][0-9]) found");
               
-		Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
-		Matcher mr1   = ptrn1.matcher(text);
-		boolean hasPhone1 = mr1.matches();
-		if (!hasPhone1){
+		         Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
+		         Matcher mr1   = ptrn1.matcher(text);
+		         boolean hasPhone1 = mr1.matches();
+		         if (!hasPhone1){
                     System.out.println("text for pattern .+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+ not found");
                     return;};
-		System.out.println("pattern ([0-9][0-9][0-9]) found");
+		         System.out.println("pattern ([0-9][0-9][0-9]) found");
 		
                int SendWebhook = 1;
                if (SendWebhook == 1){ 
-               Gson gson= new Gson();
-               Map<String, String> inputMap = new HashMap<String, String>();
-               inputMap.put("type",          "autobroker mail message");
-               inputMap.put("messageID",     messageId);
-               inputMap.put("messageBody",   text);
-               String requestBody = gson.toJson(inputMap);
+                  Gson gson= new Gson();
+                  Map<String, String> inputMap = new HashMap<String, String>();
+                  inputMap.put("type",          "autobroker mail message");
+                  inputMap.put("messageID",     messageId);
+                  inputMap.put("messageBody",   text);
+                  String requestBody = gson.toJson(inputMap);
                       
-               var client = HttpClient.newHttpClient();
-               var request = HttpRequest.newBuilder()
-                  .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
-                  .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                  .header("accept", "application/json") 
-                  .build();
+                  var client = HttpClient.newHttpClient();
+                  var request = HttpRequest.newBuilder()
+                     .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
+                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                     .header("accept", "application/json") 
+                     .build();
               
-               client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
+                  client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
                };
             }
           
@@ -136,19 +133,16 @@ public class MailServlet extends HttpServlet {
 
       private void readlpartsMail(){
 
-        final String host = A.AUTOBROKERMAIL_HOST;  
-	    final String user = A.AUTOBROKERMAIL_LOGIN;
-        final String pass = A.AUTOBROKERMAIL_PASSWORD;
+         final String host = A.LPARTSMAIL_HOST;  
+	      final String user = A.LPARTSMAIL_LOGIN;
+         final String pass = A.ALPARTSMAIL_PASSWORD;
 
-        try {
+         try {
            
-            String strg = A.AUTOBROKERMAIL_HOST;
-	        System.out.printf("strg = %s", strg);
-		 
             Properties props = new Properties();
             props.put("mail.debug", "false");
             props.put("mail.store.protocol", "imaps");
-
+            
             Session session = Session.getInstance(props);
 
             Store store = session.getStore();
@@ -158,22 +152,21 @@ public class MailServlet extends HttpServlet {
 
             inbox.open(Folder.READ_ONLY);
             
-            final FromTerm fromTerm  = new FromTerm(new InternetAddress("no_reply@ab-club.ru"));
-	        final FromTerm fromTerm1  = new FromTerm(new InternetAddress("no-reply@bibika.ru"));
+            final FromTerm fromTerm  = new FromTerm(new InternetAddress("info@l.parts"));
                       
             var a = java.time.LocalDate.now().minusDays(1);
             Date  receivedDate = java.sql.Date.valueOf(a);
             System.out.println("receivedDate = " + receivedDate);
             final ReceivedDateTerm received  = new ReceivedDateTerm(ComparisonTerm.GT, receivedDate);
                
-            final var foundMessages       = inbox.search(received);  
+            final var foundMessages = inbox.search(received);  
             System.out.println(" ***** foundMessages = "+foundMessages.length); 
 
             for (var i: foundMessages){
                 System.out.println("********************");
                
                //Filter by sender
-               if ((i.match(fromTerm) || i.match(fromTerm1) )!=true) continue;
+               if (i.match(fromTerm)!=true) continue;
         
                MimeMessage m = (MimeMessage) i;
                String messageId = m.getMessageID();
@@ -186,44 +179,44 @@ public class MailServlet extends HttpServlet {
                Document doc = Jsoup.parse(mp1);
                String text = doc.body().text();  
                System.out.println("text = "+text);
-
-	        System.out.println("regex start..");
-	       Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
-		   Matcher mr = p.matcher(text);
-		boolean hasPhone = mr.matches();
-	       	System.out.println(hasPhone);
+      	      System.out.println("regex start..");
+	            Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
+		         Matcher mr = p.matcher(text);
+		         boolean hasPhone = mr.matches();
+	       	   System.out.println(hasPhone);
                if (!hasPhone){
                     System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
                     return;};
-	 	System.out.println("pattern ([0-9][0-9][0-9]) found");
+
+	 	         System.out.println("pattern ([0-9][0-9][0-9]) found");
               
-		Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
-		Matcher mr1   = ptrn1.matcher(text);
-		boolean hasPhone1 = mr1.matches();
-		if (!hasPhone1){
+		         Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
+		         Matcher mr1   = ptrn1.matcher(text);
+		         boolean hasPhone1 = mr1.matches();
+		         if (!hasPhone1){
                     System.out.println("text for pattern .+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+ not found");
                     return;};
-		System.out.println("pattern ([0-9][0-9][0-9]) found");
+
+		         System.out.println("pattern ([0-9][0-9][0-9]) found");
 		
                int SendWebhook = 1;
                if (SendWebhook == 1){ 
-               Gson gson= new Gson();
-               Map<String, String> inputMap = new HashMap<String, String>();
-               inputMap.put("type",          "autobroker mail message");
-               inputMap.put("messageID",     messageId);
-               inputMap.put("messageBody",   text);
-               String requestBody = gson.toJson(inputMap);
+                  Gson gson= new Gson();
+                  Map<String, String> inputMap = new HashMap<String, String>();
+                  inputMap.put("type",          "autobroker mail message");
+                  inputMap.put("messageID",     messageId);
+                  inputMap.put("messageBody",   text);
+                  String requestBody = gson.toJson(inputMap);
                       
-               var client = HttpClient.newHttpClient();
-               var request = HttpRequest.newBuilder()
-                  .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
-                  .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                  .header("accept", "application/json") 
-                  .build();
-              
-               client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
+                  var client = HttpClient.newHttpClient();
+                  var request = HttpRequest.newBuilder()
+                     .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
+                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                     .header("accept", "application/json") 
+                     .build();
+                  client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
                };
-            }
+            }  //for
           
           } catch (Exception e) { 
 		  e.printStackTrace();}
