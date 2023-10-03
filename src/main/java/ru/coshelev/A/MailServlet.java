@@ -135,14 +135,14 @@ public class MailServlet extends HttpServlet {
 
          final String host = A.LPARTSMAIL_HOST;  
 	      final String user = A.LPARTSMAIL_LOGIN;
-         final String pass = A.ALPARTSMAIL_PASSWORD;
+         final String pass = A.LPARTSMAIL_PASSWORD;
 
          try {
            
             Properties props = new Properties();
             props.put("mail.debug", "false");
             props.put("mail.store.protocol", "imaps");
-            
+
             Session session = Session.getInstance(props);
 
             Store store = session.getStore();
@@ -179,7 +179,6 @@ public class MailServlet extends HttpServlet {
                Document doc = Jsoup.parse(mp1);
                String text = doc.body().text();  
                System.out.println("text = "+text);
-      	      System.out.println("regex start..");
 	            Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
 		         Matcher mr = p.matcher(text);
 		         boolean hasPhone = mr.matches();
