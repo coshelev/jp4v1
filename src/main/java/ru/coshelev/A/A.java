@@ -77,7 +77,7 @@ class A{
 		//	e.printStackTrace();
 		//};
 
-		LOG.info("map1.lpart.host= {}", map1.get("lpart.host"););
+		LOG.info("map1.lpart.host= {}", map1.get("lpart.host"));
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
