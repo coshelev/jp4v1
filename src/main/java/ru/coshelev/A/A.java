@@ -21,12 +21,10 @@ class A{
 	public static String LPARTSMAIL_PASSWORD = "";
 
 	public static void main(String[] args){
-		
-
-	    LOG.info("{}; jvm {}",  "My example for info ", System.getProperty("java.version"));		
+				
 	    LOG.warn("This is my example for warning");
 	    LOG.info("LOG.isDebugEnabled()= {}",LOG.isDebugEnabled());
-	    LOG.debug("doStop {}", "This is exapmle for debug");
+	    LOG.debug("doStop {}", "This is example for debug");
 
 	    if (LOG.isDebugEnabled())
             LOG.debug("{}", "Debug enabled");
@@ -51,9 +49,6 @@ class A{
 			e.printStackTrace();
 		};
 
-		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		//System.out.printf("map.toString() = %s \n",map.toString());
-
 		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
 		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
 		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
@@ -65,7 +60,7 @@ class A{
         HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 	
 		try{ 	
-			String filename = "LPARTSMAIL.json";
+			String filename = "LPARTS.json";
 			File f = new File(filename);
             if (!f.exists())
 				LOG.info("settings file {} does not exist", filename);
@@ -80,9 +75,6 @@ class A{
 			LOG.error("{}", e.getMessage());
 			e.printStackTrace();
 		};
-
-		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		//System.out.printf("map.toString() = %s \n",map1.toString());
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
