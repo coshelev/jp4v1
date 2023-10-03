@@ -163,66 +163,57 @@ public class MailServlet extends HttpServlet {
             System.out.println(" ***** foundMessages = "+foundMessages.length); 
 
             for (var i: foundMessages){
-                System.out.println("********************");
+               System.out.println("********************");
                
                //Filter by sender
                if (i.match(fromTerm)!=true) continue;
-        
-               MimeMessage m = (MimeMessage) i;
-               String messageId = m.getMessageID();
-               messageId = messageId.replace("<", "");
-               messageId = messageId.replace(">", "");
-              
-               //Multipart mp1 = (Multipart) i.getContent();
-               String mp1 = (String) i.getContent();
-	       
-               Document doc = Jsoup.parse(mp1);
-               String text = doc.body().text();  
-               System.out.println("text = "+text);
-	            Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
-		         Matcher mr = p.matcher(text);
-		         boolean hasPhone = mr.matches();
-	       	   System.out.println(hasPhone);
-               if (!hasPhone){
-                    System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
-                    return;};
 
-	 	         System.out.println("pattern ([0-9][0-9][0-9]) found");
-              
-		         Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
-		         Matcher mr1   = ptrn1.matcher(text);
-		         boolean hasPhone1 = mr1.matches();
-		         if (!hasPhone1){
-                    System.out.println("text for pattern .+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+ not found");
-                    return;};
-
-		         System.out.println("pattern ([0-9][0-9][0-9]) found");
-		
-               int SendWebhook = 1;
-               if (SendWebhook == 1){ 
-                  Gson gson= new Gson();
-                  Map<String, String> inputMap = new HashMap<String, String>();
-                  inputMap.put("type",          "autobroker mail message");
-                  inputMap.put("messageID",     messageId);
-                  inputMap.put("messageBody",   text);
-                  String requestBody = gson.toJson(inputMap);
-                      
-                  var client = HttpClient.newHttpClient();
-                  var request = HttpRequest.newBuilder()
-                     .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
-                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                     .header("accept", "application/json") 
-                     .build();
-                  client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
-               };
-            }  //for
+               readLPartsMessage(i);
+            }
           
           } catch (Exception e) { 
 		  e.printStackTrace();}
 
    }
 
+   private void readLPartsMessage(Message i){
+      MimeMessage m = (MimeMessage) i;
+      String messageId = m.getMessageID();
+      messageId = messageId.replace("<", "");
+      messageId = messageId.replace(">", "");
+              
+      //Multipart mp1 = (Multipart) i.getContent();
+      String mp1 = (String) i.getContent();
+	       
+      Document doc = Jsoup.parse(mp1);
+      String text = doc.body().text();  
+      System.out.println("text = "+text);
+	   Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
+		Matcher mr = p.matcher(text);
+		boolean hasPhone = mr.matches();
+	   System.out.println(hasPhone);
+      if (!hasPhone){
+         System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
+         return;};
 
+	 	System.out.println("pattern ([0-9][0-9][0-9]) found");
+ 
+      Gson gson= new Gson();
+      Map<String, String> inputMap = new HashMap<String, String>();
+      inputMap.put("type",          "lparts mail message");
+      inputMap.put("messageID",     messageId);
+      inputMap.put("messageBody",   text);
+      String requestBody = gson.toJson(inputMap);
+                      
+      var client = HttpClient.newHttpClient();
+      var request = HttpRequest.newBuilder()
+         .uri(URI.create("http://mainappl.main.luidorauto.ru/sys_agr/hs/webhooks/anypost/v1"))
+         .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+         .header("accept", "application/json") 
+         .build();
+      client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
+               
+   }
     
    
 }
