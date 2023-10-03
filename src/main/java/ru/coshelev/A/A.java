@@ -59,21 +59,21 @@ class A{
         String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts_fileFound\":\"false\"}";
 		HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 
-		//try{ 	
-		//	String filename = "LPARTS.json";
-		//	File f = new File(filename);
-        //    if (!f.exists())
-		//		LOG.info("settings file {} does not exist", filename);
-		//	if  (f.exists()){
-		//		JsonReader reader = new JsonReader(new FileReader(filename));
-    	//		map1 = gson.fromJson(reader, HashMap.class);	
-		//		LOG.info("map to string: {} \n", gson.toJson(map1));
-		//		};
-		//}
-		//catch (Exception e) {
-		//	LOG.error("{}", e.getMessage());
-		//	e.printStackTrace();
-		//};
+		try{ 	
+			String filename = "LPARTS.json";
+			File f = new File(filename);
+            if (!f.exists())
+				LOG.info("settings file {} does not exist", filename);
+			if  (f.exists()){
+				JsonReader reader = new JsonReader(new FileReader(filename));
+    			map1 = gson.fromJson(reader, HashMap.class);	
+				LOG.info("map to string: {} \n", gson.toJson(map1));
+				};
+		}
+		catch (Exception e) {
+			LOG.error("{}", e.getMessage());
+			e.printStackTrace();
+		};
 
 		LOG.info("map1.lpart.host= {}", map1.get("lparts.host"));
 

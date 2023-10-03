@@ -14,9 +14,13 @@ import org.jsoup.nodes.Document;
 import java.net.URI;
 import java.net.http.*;
 import java.util.regex.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MailServlet extends HttpServlet {
-    private String greeting="Hello World from MailServlet";
+   private String greeting="Hello World from MailServlet";
+   private static final Logger LOG = LoggerFactory.getLogger(A.MailServlet);
+
     public MailServlet(){}
     public MailServlet(String greeting){
         this.greeting=greeting;
@@ -184,8 +188,33 @@ public class MailServlet extends HttpServlet {
       messageId = messageId.replace("<", "");
       messageId = messageId.replace(">", "");
               
-      //Multipart mp1 = (Multipart) i.getContent();
-      String mp1 = (String) i.getContent();
+      Multipart mp = (Multipart) i.getContent();
+      int count = mp.getCount();
+      for (int j = 0; j < count; j++) {
+         result+="\n\n";
+         BodyPart bodyPart = mimeMultipart.getBodyPart(i);
+         if (bodyPart.isMimeType("text/plain")) {
+            /*
+            result = result + "\n" + bodyPart.getContent();
+            break; 
+            */ 
+            // without break same text appears twice in my tests
+            }    
+         else if (bodyPart.isMimeType("text/html")) {
+            String html = (String) bodyPart.getContent();
+            //html has all the html tags for you
+            result = result + "\n" + org.jsoup.Jsoup.parse(html).text();
+
+            LOG.info("html= {}", html);
+
+            } 
+         else if (bodyPart.getContent() instanceof MimeMultipart){
+            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
+         }
+      }
+
+
+      String mp1 = "hello world";
 	       
       Document doc = Jsoup.parse(mp1);
       String text = doc.body().text();  
