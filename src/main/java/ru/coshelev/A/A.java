@@ -23,10 +23,10 @@ class A{
 	public static void main(String[] args){
 		
 
-	    LOG.info("{}; jvm {}",  "My example for info ", System.getProperty("java.version"));		
+	    LOG.info("jvm {}",  System.getProperty("java.version"));		
 	    LOG.warn("This is my example for warning");
 	    LOG.info("LOG.isDebugEnabled()= {}",LOG.isDebugEnabled());
-	    LOG.debug("doStop {}", "This is exapmle for debug");
+	    LOG.debug("doStop {}", "This is example for debug");
 
 	    if (LOG.isDebugEnabled())
             LOG.debug("{}", "Debug enabled");
@@ -65,7 +65,7 @@ class A{
         HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 	
 		try{ 	
-			String filename = "LPARTSMAIL.json";
+			String filename = "LPARTS.json";
 			File f = new File(filename);
             if (!f.exists())
 				LOG.info("settings file {} does not exist", filename);
