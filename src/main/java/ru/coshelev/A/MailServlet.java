@@ -202,18 +202,23 @@ public class MailServlet extends HttpServlet {
          else if (bodyPart.isMimeType("text/html")) {
             String html = (String) bodyPart.getContent();
             LOG.info("html= {}", html);
+            readLPartsMessageText(html, messageId);
             } 
          else if (bodyPart.getContent() instanceof MimeMultipart){
             //result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
+            }
          }
-      }
+      } catch(Exception e) { 
+		   e.printStackTrace();}       
+   }
 
+   private void readLPartsMessageText(String html, String messageId){
 
-      String mp1 = "hello world";
-	       
-      Document doc = Jsoup.parse(mp1);
-      String text = doc.body().text();  
-      System.out.println("text = "+text);
+      try {    
+      Document doc   = Jsoup.parse(html);
+      String text    = doc.body().text();  
+      LOG.info("{}", text);
+      
 	   Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
 		Matcher mr = p.matcher(text);
 		boolean hasPhone = mr.matches();
@@ -238,8 +243,9 @@ public class MailServlet extends HttpServlet {
          .header("accept", "application/json") 
          .build();
       client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
+      }
+      catch(Exception e) { 
+		   e.printStackTrace();}  
 
-      } catch(Exception e) { 
-		   e.printStackTrace();}       
    }
 }

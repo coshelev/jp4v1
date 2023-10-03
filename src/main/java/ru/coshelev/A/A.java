@@ -52,7 +52,7 @@ class A{
 		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
 		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
 		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
-		LOG.info(" AUTOBROKERMAIL: HOST = {}; LOGIN = {}; PASSWORD = {}", AUTOBROKERMAIL_HOST, AUTOBROKERMAIL_LOGIN, AUTOBROKERMAIL_PASSWORD);
+		LOG.info("AUTOBROKERMAIL: HOST = {}; LOGIN = {}; PASSWORD = {}", AUTOBROKERMAIL_HOST, AUTOBROKERMAIL_LOGIN, AUTOBROKERMAIL_PASSWORD);
 
         ///////////////////////////////////////////////////////////////
 
@@ -81,7 +81,7 @@ class A{
 		LPARTSMAIL_LOGIN    = map1.get("lparts.login");
 		LPARTSMAIL_PASSWORD = map1.get("lparts.password");
 
-		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
+		LOG.info("LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
 		JettyServer server = new JettyServer();
 		try {
