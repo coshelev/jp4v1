@@ -158,13 +158,13 @@ public class MailServlet extends HttpServlet {
             
             final FromTerm fromTerm  = new FromTerm(new InternetAddress("info@l.parts"));
                       
-            var a = java.time.LocalDate.now().minusDays(1);
+            var a = java.time.LocalDate.now().minusDays(15);
             Date  receivedDate = java.sql.Date.valueOf(a);
-            System.out.println("receivedDate = " + receivedDate);
+            LOG.info("receivedDate = {}", receivedDate);
             final ReceivedDateTerm received  = new ReceivedDateTerm(ComparisonTerm.GT, receivedDate);
                
             final var foundMessages = inbox.search(received);  
-            System.out.println(" ***** foundMessages = "+foundMessages.length); 
+            LOG.info(" ***** foundMessages = {}", foundMessages.length);
 
             for (var i: foundMessages){
                System.out.println("********************");
@@ -218,8 +218,8 @@ public class MailServlet extends HttpServlet {
       Document doc   = Jsoup.parse(html);
       String text    = doc.body().text();  
       LOG.info("{}", text);
-      
-	   Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
+
+	   Pattern p = Pattern.compile("Телефон.*:.*((8|\+7)[\- ]?)?(9\(?\d\d\d\)?[\- ]?)?[\d\- ]{7,10}\d\d");
 		Matcher mr = p.matcher(text);
 		boolean hasPhone = mr.matches();
 	   System.out.println(hasPhone);
