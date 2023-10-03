@@ -191,7 +191,7 @@ public class MailServlet extends HttpServlet {
       Multipart mp = (Multipart) i.getContent();
       int count = mp.getCount();
       for (int j = 0; j < count; j++) {
-         BodyPart bodyPart = mimeMultipart.getBodyPart(i);
+         BodyPart bodyPart = mp.getBodyPart(i);
          if (bodyPart.isMimeType("text/plain")) {
             /*
             result = result + "\n" + bodyPart.getContent();
@@ -204,7 +204,7 @@ public class MailServlet extends HttpServlet {
             LOG.info("html= {}", html);
             } 
          else if (bodyPart.getContent() instanceof MimeMultipart){
-            result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
+            //result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
          }
       }
 
