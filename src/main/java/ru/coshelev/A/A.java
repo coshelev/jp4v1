@@ -57,31 +57,29 @@ class A{
         ///////////////////////////////////////////////////////////////
 
         String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
-        HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
+        HashMap<String, String> map1 = gson.fromJson(LLPARTSMAILSettings, HashMap.class);
 	
-		try{ 	
-			String filename = "LPARTS.json";
-			File f = new File(filename);
-            if (!f.exists())
-				LOG.info("settings file {} does not exist", filename);
-			if  (f.exists()){
-				JsonReader reader = new JsonReader(new FileReader(filename));
-    			map1 = gson.fromJson(reader, HashMap.class);	
-				LOG.info("map to string: {} \n", gson.toJson(map1));
-				};
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			LOG.error("{}", e.getMessage());
-			e.printStackTrace();
-		};
+		//try{ 	
+		//	String filename = "LPARTS.json";
+		//	File f = new File(filename);
+        //    if (!f.exists())
+		//		LOG.info("settings file {} does not exist", filename);
+		//	if  (f.exists()){
+		//		JsonReader reader = new JsonReader(new FileReader(filename));
+    	//		map1 = gson.fromJson(reader, HashMap.class);	
+		//		LOG.info("map to string: {} \n", gson.toJson(map1));
+		//		};
+		//}
+		//catch (Exception e) {
+		//	LOG.error("{}", e.getMessage());
+		//	e.printStackTrace();
+		//};
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
 		LPARTSMAIL_PASSWORD = map1.get("lpart.password");
 		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
-		LOG.info("{}", " * class A before jetty *");
 		JettyServer server = new JettyServer();
 		try {
         		server.start();
