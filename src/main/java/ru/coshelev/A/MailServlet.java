@@ -220,7 +220,7 @@ public class MailServlet extends HttpServlet {
       LOG.info("{}", text);
 
 	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
-      Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7))");
+      Pattern p = Pattern.compile("Телефон.*:);
 		Matcher mr = p.matcher(text);
 		boolean hasPhone = mr.matches();
 	   System.out.println(hasPhone);
