@@ -217,9 +217,10 @@ public class MailServlet extends HttpServlet {
       LOG.info("text = {}", text);
 
 	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
-      Pattern p = Pattern.compile(".е.");
+      Pattern p = Pattern.compile(".+елефон+.");
 		Matcher mr = p.matcher(text);
 		boolean textContainsPhone = mr.matches();
+      LOG.info("textContainsPhone = {}", textContainsPhone);
       if (!textContainsPhone){
          LOG.info("text for pattern not found");
          return;};
