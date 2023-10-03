@@ -193,11 +193,8 @@ public class MailServlet extends HttpServlet {
       for (int j = 0; j < count; j++) {
          BodyPart bodyPart = mp.getBodyPart(j);
          if (bodyPart.isMimeType("text/plain")) {
-            /*
-            result = result + "\n" + bodyPart.getContent();
-            break; 
-            */ 
-            // without break same text appears twice in my tests
+            //result = result + "\n" + bodyPart.getContent();
+            //break; 
             }    
          else if (bodyPart.isMimeType("text/html")) {
             String html = (String) bodyPart.getContent();
@@ -220,7 +217,7 @@ public class MailServlet extends HttpServlet {
       LOG.info("text = {}", text);
 
 	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
-      Pattern p = Pattern.compile(".елефон.");
+      Pattern p = Pattern.compile(".е.");
 		Matcher mr = p.matcher(text);
 		boolean textContainsPhone = mr.matches();
       if (!textContainsPhone){
