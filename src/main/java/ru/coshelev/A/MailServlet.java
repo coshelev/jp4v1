@@ -167,7 +167,7 @@ public class MailServlet extends HttpServlet {
             LOG.info(" ***** foundMessages = {}", foundMessages.length);
 
             for (var i: foundMessages){
-               LOG.info("{}","***********************************************************************************")
+               LOG.info("{}","***********************************************************************************");
             
                //Filter by sender
                if (i.match(fromTerm)!=true) continue;
