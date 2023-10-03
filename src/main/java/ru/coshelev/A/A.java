@@ -58,7 +58,7 @@ class A{
 
         //String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
 		String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
-        HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
+        HashMap<String, String> map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 	
 		//try{ 	
 		//	String filename = "LPARTS.json";
@@ -76,9 +76,9 @@ class A{
 		//	e.printStackTrace();
 		//};
 
-		LPARTSMAIL_HOST     = map1.get("lpart.host");
-		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
-		LPARTSMAIL_PASSWORD = map1.get("lpart.password");
+		LPARTSMAIL_HOST     = map.get("lpart.host");
+		LPARTSMAIL_LOGIN    = map.get("lpart.login");
+		LPARTSMAIL_PASSWORD = map.get("lpart.password");
 		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
 		JettyServer server = new JettyServer();
