@@ -41,9 +41,9 @@ public class MailServlet extends HttpServlet {
    
    private void readAutobrokerMail(){
 
-        final String host = A.AUTOBROKERMAIL_HOST;  
-	    final String user = A.AUTOBROKERMAIL_LOGIN;
-        final String pass = A.AUTOBROKERMAIL_PASSWORD;
+      final String host = A.AUTOBROKERMAIL_HOST;  
+	   final String user = A.AUTOBROKERMAIL_LOGIN;
+      final String pass = A.AUTOBROKERMAIL_PASSWORD;
 
         try {
            
@@ -177,6 +177,8 @@ public class MailServlet extends HttpServlet {
    }
 
    private void readLPartsMessage(Message i){
+
+      try {
       MimeMessage m = (MimeMessage) i;
       String messageId = m.getMessageID();
       messageId = messageId.replace("<", "");
@@ -212,8 +214,8 @@ public class MailServlet extends HttpServlet {
          .header("accept", "application/json") 
          .build();
       client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
-               
+
+      } catch(Exception e) { 
+		   e.printStackTrace();}       
    }
-    
-   
 }
