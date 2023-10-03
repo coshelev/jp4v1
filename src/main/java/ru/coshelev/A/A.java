@@ -16,9 +16,9 @@ class A{
 	public static String AUTOBROKERMAIL_LOGIN    = "";
 	public static String AUTOBROKERMAIL_PASSWORD = "";
 
-    public static String LPARTSMAIL_HOST     = "1";
-	public static String LPARTSMAIL_LOGIN    = "2";
-	public static String LPARTSMAIL_PASSWORD = "3";
+    public static String LPARTSMAIL_HOST     = "";
+	public static String LPARTSMAIL_LOGIN    = "";
+	public static String LPARTSMAIL_PASSWORD = "";
 
 	public static void main(String[] args){
 				
@@ -49,16 +49,14 @@ class A{
 			e.printStackTrace();
 		};
 
-		//AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
-		//AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
-		//AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
+		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
+		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
+		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
 		LOG.info(" AUTOBROKERMAIL: HOST = {}; LOGIN = {}; PASSWORD = {}", AUTOBROKERMAIL_HOST, AUTOBROKERMAIL_LOGIN, AUTOBROKERMAIL_PASSWORD);
 
         ///////////////////////////////////////////////////////////////
 
-        String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
-		//String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru_\", \"autobrokerMail.login\":\"luidorexpertALL_\", \"autobrokerMail.password_\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
-        //HashMap<String, String> map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
+        String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts_fileFound\":\"false\"}";
 		HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 
 		//try{ 	
@@ -77,15 +75,11 @@ class A{
 		//	e.printStackTrace();
 		//};
 
-		LOG.info("map1.lpart.host= {}", map1.get("lpart.host"));
+		LOG.info("map1.lpart.host= {}", map1.get("lparts.host"));
 
-		LPARTSMAIL_HOST     = map1.get("lpart.host");
-		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
-		LPARTSMAIL_PASSWORD = map1.get("lpart.password");
-
-		//LPARTSMAIL_HOST     = map.get("autobrokerMail.host");
-		//LPARTSMAIL_LOGIN    = map.get("autobrokerMail.login");
-		//LPARTSMAIL_PASSWORD = map.get("autobrokerMail.password");
+		LPARTSMAIL_HOST     = map1.get("lparts.host");
+		LPARTSMAIL_LOGIN    = map1.get("lparts.login");
+		LPARTSMAIL_PASSWORD = map1.get("lparts.password");
 
 		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
