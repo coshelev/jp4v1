@@ -191,7 +191,7 @@ public class MailServlet extends HttpServlet {
       Multipart mp = (Multipart) i.getContent();
       int count = mp.getCount();
       for (int j = 0; j < count; j++) {
-         BodyPart bodyPart = mp.getBodyPart(i);
+         BodyPart bodyPart = mp.getBodyPart(j);
          if (bodyPart.isMimeType("text/plain")) {
             /*
             result = result + "\n" + bodyPart.getContent();
