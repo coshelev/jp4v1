@@ -219,15 +219,15 @@ public class MailServlet extends HttpServlet {
       String text    = doc.body().text();  
       LOG.info("{}", text);
 
-	   Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
+	   Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
 		Matcher mr = p.matcher(text);
 		boolean hasPhone = mr.matches();
 	   System.out.println(hasPhone);
       if (!hasPhone){
-         System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
+         LOG.info("text for pattern not found");
          return;};
 
-	 	System.out.println("pattern ([0-9][0-9][0-9]) found");
+      LOG.info("text for pattern found");
  
       Gson gson= new Gson();
       Map<String, String> inputMap = new HashMap<String, String>();
