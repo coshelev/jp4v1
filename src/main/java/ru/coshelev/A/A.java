@@ -57,7 +57,7 @@ class A{
         ///////////////////////////////////////////////////////////////
 
         //String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
-		String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
+		String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru_\", \"autobrokerMail.login\":\"luidorexpertALL_\", \"autobrokerMail.password_\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
         //HashMap<String, String> map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 		map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 
