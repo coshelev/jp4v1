@@ -80,8 +80,8 @@ class A{
 			e.printStackTrace();
 		};
 
-		System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
-		System.out.printf("map.toString() = %s \n",map1.toString());
+		//System.out.printf("gson.toJson(map)=%s \n", gson.toJson(map));
+		//System.out.printf("map.toString() = %s \n",map1.toString());
 
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
