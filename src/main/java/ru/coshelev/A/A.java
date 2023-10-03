@@ -39,15 +39,15 @@ class A{
 			String filename = "AUTOBROKERMAIL.json";
 			File f = new File(filename);
         	if (!f.exists())
-            	System.out.printf("settings file %1 does not exist \n", filename);
+				LOG.info("settings file {} does not exist", filename);
 			if  (f.exists()){
 				JsonReader reader = new JsonReader(new FileReader(filename));
     			map = gson.fromJson(reader, HashMap.class);	
-				System.out.printf( "map to string: %s \n", gson.toJson(map));
+				LOG.info("map to string: {} \n", gson.toJson(map));
 				};
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			LOG.error("{}", e.getMessage());
 			e.printStackTrace();
 		};
 
@@ -68,15 +68,16 @@ class A{
 			String filename = "LPARTSMAIL.json";
 			File f = new File(filename);
             if (!f.exists())
-            	System.out.printf("settings file %1 does not exist \n", filename);
+				LOG.info("settings file {} does not exist", filename);
 			if  (f.exists()){
 				JsonReader reader = new JsonReader(new FileReader(filename));
     			map1 = gson.fromJson(reader, HashMap.class);	
-				System.out.printf( "map to string: %s \n", gson.toJson(map1));
+				LOG.info("map to string: {} \n", gson.toJson(map1));
 				};
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			LOG.error("{}", e.getMessage());
 			e.printStackTrace();
 		};
 
@@ -86,10 +87,9 @@ class A{
 		LPARTSMAIL_HOST     = map1.get("lpart.host");
 		LPARTSMAIL_LOGIN    = map1.get("lpart.login");
 		LPARTSMAIL_PASSWORD = map1.get("lpart.password");
+		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
 		LOG.info("{}", " * class A before jetty *");
-		
-		//Start webserever
 		JettyServer server = new JettyServer();
 		try {
         		server.start();
