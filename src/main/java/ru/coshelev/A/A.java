@@ -49,15 +49,15 @@ class A{
 			e.printStackTrace();
 		};
 
-		AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
-		AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
-		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
+		//AUTOBROKERMAIL_HOST     = map.get("autobrokerMail.host");
+		//AUTOBROKERMAIL_LOGIN    = map.get("autobrokerMail.login");
+		//AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
 		LOG.info(" AUTOBROKERMAIL: HOST = {}; LOGIN = {}; PASSWORD = {}", AUTOBROKERMAIL_HOST, AUTOBROKERMAIL_LOGIN, AUTOBROKERMAIL_PASSWORD);
 
         ///////////////////////////////////////////////////////////////
 
-        String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
-		//String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
+        //String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts.fileFound\":\"false\"}";
+		String LPARTSMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
         //HashMap<String, String> map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 		map = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 
@@ -77,9 +77,14 @@ class A{
 		//	e.printStackTrace();
 		//};
 
-		LPARTSMAIL_HOST     = map.get("lpart.host");
-		LPARTSMAIL_LOGIN    = map.get("lpart.login");
-		LPARTSMAIL_PASSWORD = map.get("lpart.password");
+		//LPARTSMAIL_HOST     = map.get("lpart.host");
+		//LPARTSMAIL_LOGIN    = map.get("lpart.login");
+		//LPARTSMAIL_PASSWORD = map.get("lpart.password");
+
+		LPARTSMAIL_HOST     = map.get("autobrokerMail.host");
+		LPARTSMAIL_LOGIN    = map.get("autobrokerMail.login");
+		LPARTSMAIL_PASSWORD = map.get("autobrokerMail.password");
+
 		LOG.info(" LPARTS: HOST = {}; LOGIN = {}; PASSWORD = {}", LPARTSMAIL_HOST, LPARTSMAIL_LOGIN, LPARTSMAIL_PASSWORD);
 
 		JettyServer server = new JettyServer();
