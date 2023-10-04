@@ -32,7 +32,7 @@ public class MailServlet extends HttpServlet {
         response.getWriter().println("<h1>"+greeting+"</h1>");
         response.getWriter().println("session=" + request.getSession(true).getId());
         
-        //readAutobrokerMail();
+        readAutobrokerMail();
         readlpartsMail();
     }
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {

@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 
 class A{
 
-
-	//private static final Logger logger = LogManager.getLogger("App");
 	private static final Logger LOG = LoggerFactory.getLogger(A.class);
 
 	public static String AUTOBROKERMAIL_HOST     = "";
@@ -60,7 +58,7 @@ class A{
 		HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
 
 		try{ 	
-			String filename = "LPARTS.json";
+			String filename = "LPARTSMAIL.json";
 			File f = new File(filename);
             if (!f.exists())
 				LOG.info("settings file {} does not exist", filename);
