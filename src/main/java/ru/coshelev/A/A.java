@@ -27,6 +27,8 @@ class A{
 	    if (LOG.isDebugEnabled())
             LOG.debug("{}", "Debug enabled");
 
+		///////// Autobroker
+		
 	    Gson gson= new Gson();
 	    String AUTOBROKERMAILSettings = "{\"autobrokerMail.host\":\"imap.yandex.ru\", \"autobrokerMail.login\":\"luidorexpertALL\", \"autobrokerMail.password\":\"cfirdrfnabxyzmgk\",\"autobrokerMail.fileFound\":\"false\"}";
         HashMap<String, String> map = gson.fromJson(AUTOBROKERMAILSettings, HashMap.class);
@@ -52,7 +54,7 @@ class A{
 		AUTOBROKERMAIL_PASSWORD = map.get("autobrokerMail.password");
 		LOG.info("AUTOBROKERMAIL: HOST = {}; LOGIN = {}; PASSWORD = {}", AUTOBROKERMAIL_HOST, AUTOBROKERMAIL_LOGIN, AUTOBROKERMAIL_PASSWORD);
 
-        ///////////////////////////////////////////////////////////////
+        //////// Read lparts-leads@yandex.ru (l.parts)
 
         String LPARTSMAILSettings = "{\"lparts.host\":\"imap.yandex.ru\", \"lparts.login\":\"lparts-leads\", \"lparts.password\":\"yzlbyihxbpyqoqov\",\"lparts_fileFound\":\"false\"}";
 		HashMap<String, String> map1 = gson.fromJson(LPARTSMAILSettings, HashMap.class);
