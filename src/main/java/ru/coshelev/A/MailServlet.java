@@ -216,7 +216,7 @@ public class MailServlet extends HttpServlet {
       String text    = doc.body().text();  
       LOG.info("text = {}", text);
 
-	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\\+7)[\\- ]?)?(9\\(?\\d\\d\\d\\)?[\\- ]?)?[\\d\\- ]{7,10}\\d\\d");
+	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\+7)[\- ]?)?(9\(?\d\d\d\)?[\- ]?)?[\d\- ]{7,10}\d\d");
       Pattern p = Pattern.compile(".+[Тт]елефон.+");
 		Matcher mr = p.matcher(text);
 		boolean textContainsPhone = mr.matches();

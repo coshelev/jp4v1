@@ -2,8 +2,8 @@
 <project>
 <modelVersion>4.0.0</modelVersion>
 <groupId>ru.coshelev.A</groupId>
-<artifactId>A</artifactId>
-<version>1.1</version>
+<artifactId>lparts-leads_yandex.ru</artifactId>
+<version>1</version>
 <packaging>jar</packaging>
    <build>
         <plugins>
