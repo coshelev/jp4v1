@@ -158,7 +158,7 @@ public class MailServlet extends HttpServlet {
             
             final FromTerm fromTerm  = new FromTerm(new InternetAddress("info@l.parts"));
                       
-            var a = java.time.LocalDate.now().minusDays(15);
+            var a = java.time.LocalDate.now().minusDays(16);
             Date  receivedDate = java.sql.Date.valueOf(a);
             LOG.info("receivedDate = {}", receivedDate);
             final ReceivedDateTerm received  = new ReceivedDateTerm(ComparisonTerm.GT, receivedDate);
