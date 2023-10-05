@@ -67,16 +67,17 @@ public class MailServlet extends HttpServlet {
             final FromTerm fromTerm  = new FromTerm(new InternetAddress("no_reply@ab-club.ru"));
 	         final FromTerm fromTerm1  = new FromTerm(new InternetAddress("no-reply@bibika.ru"));
                       
-            var a = java.time.LocalDate.now().minusDays(1);
+            var a = java.time.LocalDate.now();
             Date  receivedDate = java.sql.Date.valueOf(a);
-            System.out.println("receivedDate = " + receivedDate);
+            LOG.info("autobroker: receivedDate = {}", receivedDate);
+
             final ReceivedDateTerm received  = new ReceivedDateTerm(ComparisonTerm.GT, receivedDate);
                
             final var foundMessages       = inbox.search(received);  
-            System.out.println(" ***** foundMessages = "+foundMessages.length); 
+            LOG.info(" ***** autobroker: foundMessages = {}", foundMessages.length);
 
             for (var i: foundMessages){
-                System.out.println("********************");
+                System.out.println("***** autobroker ********************************************************");
                
                //Filter by sender
                if ((i.match(fromTerm) || i.match(fromTerm1) )!=true) continue;
@@ -91,25 +92,25 @@ public class MailServlet extends HttpServlet {
 	       
                Document doc = Jsoup.parse(mp1);
                String text = doc.body().text();  
-               System.out.println("text = "+text);
+               LOG.info(" autobroker: text = {}", text);
 
 	            System.out.println("regex start..");
 	            Pattern p = Pattern.compile(".+([0-9][0-9][0-9]).+");
 		         Matcher mr = p.matcher(text);
 		         boolean hasPhone = mr.matches();
-	       	   System.out.println(hasPhone);
                if (!hasPhone){
-                    System.out.println("text for pattern .+([0-9][0-9][0-9]).+ not found");
+                    LOG.info("{}", "autobroker: text for pattern .+([0-9][0-9][0-9]).+ not found");
                     return;};
-	 	         System.out.println("pattern ([0-9][0-9][0-9]) found");
-              
+
+               LOG.info("{}", "autobroker: pattern ([0-9][0-9][0-9]) found");
+            
 		         Pattern ptrn1 = Pattern.compile(".+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+");
 		         Matcher mr1   = ptrn1.matcher(text);
 		         boolean hasPhone1 = mr1.matches();
 		         if (!hasPhone1){
-                    System.out.println("text for pattern .+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+ not found");
+                    LOG.info("{}", "autobroker: text for pattern .+([0-9][0-9][0-9]).+[0-9].+[0-9].+[0-9].+[0-9].+ not found");
                     return;};
-		         System.out.println("pattern ([0-9][0-9][0-9]) found");
+               LOG.info("{}", "autobroker: pattern ([0-9][0-9][0-9]) found");
 		
                int SendWebhook = 1;
                if (SendWebhook == 1){ 
@@ -158,16 +159,16 @@ public class MailServlet extends HttpServlet {
             
             final FromTerm fromTerm  = new FromTerm(new InternetAddress("info@l.parts"));
                       
-            var a = java.time.LocalDate.now().minusDays(1);
+            var a = java.time.LocalDate.now();
             Date  receivedDate = java.sql.Date.valueOf(a);
-            LOG.info("receivedDate = {}", receivedDate);
+            LOG.info("lparts: receivedDate = {}", receivedDate);
             final ReceivedDateTerm received  = new ReceivedDateTerm(ComparisonTerm.GT, receivedDate);
                
             final var foundMessages = inbox.search(received);  
-            LOG.info(" ***** foundMessages = {}", foundMessages.length);
+            LOG.info(" ***** lparts: foundMessages = {}", foundMessages.length);
 
             for (var i: foundMessages){
-               LOG.info("{}","***********************************************************************************");
+               LOG.info("{}","****** lparts    *****************************************************************************");
             
                //Filter by sender
                if (i.match(fromTerm)!=true) continue;
@@ -198,7 +199,7 @@ public class MailServlet extends HttpServlet {
             }    
          else if (bodyPart.isMimeType("text/html")) {
             String html = (String) bodyPart.getContent();
-            LOG.info("html = {}", html);
+            LOG.info("lparts: html = {}", html);
             readLPartsMessageText(html, messageId);
             } 
          else if (bodyPart.getContent() instanceof MimeMultipart){
@@ -214,7 +215,7 @@ public class MailServlet extends HttpServlet {
       try {    
       Document doc   = Jsoup.parse(html);
       String text    = doc.body().text();  
-      LOG.info("text = {}", text);
+      LOG.info("lparts: text = {}", text);
 
 	   //Pattern p = Pattern.compile("Телефон.*:.*((8|\+7)[\- ]?)?(9\(?\d\d\d\)?[\- ]?)?[\d\- ]{7,10}\d\d");
       Pattern p = Pattern.compile(".+[Тт]елефон.+");
@@ -222,10 +223,10 @@ public class MailServlet extends HttpServlet {
 		boolean textContainsPhone = mr.matches();
       LOG.info("textContainsPhone = {}", textContainsPhone);
       if (!textContainsPhone){
-         LOG.info("text for pattern not found");
+         LOG.info("lparts: text for pattern not found");
          return;};
 
-      LOG.info("text for pattern found");
+      LOG.info("lparts: text for pattern found");
  
       Gson gson= new Gson();
       Map<String, String> inputMap = new HashMap<String, String>();
